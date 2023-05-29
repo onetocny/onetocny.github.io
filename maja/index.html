@@ -115,7 +115,7 @@
       <h1 class="h3 mb-3 fw-normal hours">0</h1>
       <h1 class="h3 mb-3 fw-normal minutes">0</h1>
       <h1 class="h3 mb-3 fw-normal secs">0</h1>
-  </div>
+    </div>
   </main>
 
 
@@ -170,13 +170,24 @@
       var seconds = Math.floor(diff / (1000));
       diff -= seconds * (1000);
 
-      $("#countdown_page h1.days").text(days + " dní");
-      $("#countdown_page h1.hours").text(hours + " hodin");
-      $("#countdown_page h1.minutes").text(mins + " minut");
-      $("#countdown_page h1.secs").text(seconds + " vteřin");
+      $("#countdown_page h1.days").text(getTimeText(days, "den", "dny", "dní"));
+      $("#countdown_page h1.hours").text(getTimeText(hours, "hodina", "hodiny", "hodin"));
+      $("#countdown_page h1.minutes").text(getTimeText(mins, "minuta", "minuty", "minut"));
+      $("#countdown_page h1.secs").text(getTimeText(seconds, "sekunda", "sekundy", "sekund"));
 
     }, 1000);
 
+    function getTimeText(number, one, two, more) {
+      if (number == 1) {
+        return number + " " + one;
+      }
+      else if (number > 1 && number < 5) {
+        return number + " " + two;
+      }
+      else {
+        return number + " " + more;
+      }
+    }
   })
 </script>
 
