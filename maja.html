@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <title>Májina rozlučka</title>
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+
+
+        $(function()
+        {
+            var code = "1234";
+            var end = new Date("2023-09-09 12:00:00");
+
+            $("button").click(function()
+            {
+                checkCode();
+            });
+
+            $("body").on("keypress", function(e)
+            {
+                if(e.keyCode == 13)
+                {
+                    checkCode();
+                }
+            });
+
+            function checkCode()
+            {
+                var enteredCode = $("input").val();
+                if(enteredCode == code)
+                {
+                    $("#code_page").hide();
+                    $("#countdown_page").show();
+                }
+                else
+                {
+                    alert("Špatná odpověď :(");
+                }
+            }
+
+            setInterval(function()
+            {
+                var now = new Date();
+                var diff = end - now;
+
+                var diff = end.getTime() - now.getTime();
+
+                var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                diff -=  days * (1000 * 60 * 60 * 24);
+
+                var hours = Math.floor(diff / (1000 * 60 * 60));
+                diff -= hours * (1000 * 60 * 60);
+
+                var mins = Math.floor(diff / (1000 * 60));
+                diff -= mins * (1000 * 60);
+
+                var seconds = Math.floor(diff / (1000));
+                diff -= seconds * (1000);
+
+                $("#countdown_page h1").text(days + " dní, " + hours + " hodin, " + mins + " minut, " + seconds + " vteřin");
+            }, 1000);
+
+        })
+    </script>
+
+    <body>
+        <div id="code_page">
+            <input></input>
+            <button>Submit</button>
+        </div>
+        <div id="countdown_page" style="display: none;">
+            <h1>00:00:00</h1>
+        </div>
+    </body>
+</html>
